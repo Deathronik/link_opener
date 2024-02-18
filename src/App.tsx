@@ -1,6 +1,15 @@
 import './App.css'
+import {ChangeEvent, useState} from "react";
 
 function App() {
+    const [splitBy, setSplitBy] = useState(20)
+
+    const onChangeSplitBy = (e: ChangeEvent<HTMLInputElement>) => {
+        setSplitBy(Number.parseInt(e.target.value))
+    }
+    const onSplitClick = () => {
+        console.log(splitBy)
+    }
 
     return (
         <div className="pt-5 pb-5 pl-52 pr-52 flex flex-col justify-center items-center preview text-start">
@@ -29,19 +38,19 @@ function App() {
             <div className="flex flex-row items-center font-bold justify-start w-4/6 mt-2">
                 Split by:
                 <div className="flex flex-row justify-center items-center border-2 rounded-box p-1 ml-3">
-                    <input type="radio" name="radio-1" className="radio radio-sm" checked/>
+                    <input type="radio" name="radio-1" className="radio radio-sm" value={5} onChange={onChangeSplitBy}/>
                     <span className="ml-1">5</span>
                 </div>
                 <div className="flex flex-row justify-center items-center border-2 rounded-box p-1 ml-3">
-                    <input type="radio" name="radio-1" className="radio radio-sm" checked/>
+                    <input value={10} onChange={onChangeSplitBy} type="radio" name="radio-1" className="radio radio-sm"/>
                     <span className="ml-1">10</span>
                 </div>
                 <div className="flex flex-row justify-center items-center border-2 rounded-box p-1 ml-3">
-                    <input type="radio" name="radio-1" className="radio radio-sm" checked/>
+                    <input value={20} onChange={onChangeSplitBy} type="radio" name="radio-1" className="radio radio-sm" checked={splitBy === 20}/>
                     <span className="ml-1">20</span>
                 </div>
             </div>
-            <button className="btn mt-3 w-4/6 font-bold">Split</button>
+            <button onClick={onSplitClick} className="btn mt-3 w-4/6 font-bold">Split</button>
         </div>
     )
 }
